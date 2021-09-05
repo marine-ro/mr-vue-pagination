@@ -1,27 +1,35 @@
 <template>
   <div class="page-pagination">
-    <MrPagination />
+    <MrPagination
+      :externalCurrentPage="pagination.externalCurrentPage"
+      :lastPage="pagination.lastPage"
+      @changePage="changePage"
+    />
   </div>
 </template>
 
 <script>
-import MrPagination from './components/MrPagination.vue';
+import MrPagination from './pagination/components/MrPagination.vue';
 
 export default {
   name: 'App',
   components: {
     MrPagination,
   },
+  data() {
+    return {
+      pagination: {
+        externalCurrentPage: 1,
+        lastPage: 10,
+        total: 0,
+      },
+    };
+  },
+
+  methods: {
+    changePage(page) {
+      this.pagination.externalCurrentPage = page;
+    },
+  },
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
